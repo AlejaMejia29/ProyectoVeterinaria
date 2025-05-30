@@ -64,8 +64,8 @@ public class DuenioService {
         duenio.setNombre(dto.getNombre());
         duenio.setApellidos(dto.getApellidos());
         duenio.setCorreo(dto.getCorreo());
-        duenio.setTeléfono(dto.getTeléfono());
-        duenio.setDirección(dto.getDirección());
+        duenio.setTelefono(dto.getTelefono());
+        duenio.setDireccion(dto.getDireccion());
         return duenioRepository.save(duenio);
     }
 
@@ -76,19 +76,15 @@ public class DuenioService {
      * @param dto Datos nuevos del dueño.
      * @return true si el dueño fue actualizado correctamente, false si no existe.
      */
-    public boolean update(Integer id, DuenioDto dto) {
-        Optional<Duenio> optional = duenioRepository.findById(id);
-        if (optional.isPresent()) {
-            Duenio duenio = optional.get();
+    public Optional<Duenio> update(Integer id, DuenioDto dto) {
+        return duenioRepository.findById(id).map(duenio -> {
             duenio.setNombre(dto.getNombre());
             duenio.setApellidos(dto.getApellidos());
             duenio.setCorreo(dto.getCorreo());
-            duenio.setTeléfono(dto.getTeléfono());
-            duenio.setDirección(dto.getDirección());
-            duenioRepository.save(duenio);
-            return true;
-        }
-        return false;
+            duenio.setTelefono(dto.getTelefono());
+            duenio.setDireccion(dto.getDireccion());
+            return duenioRepository.save(duenio);
+        });
     }
 
     /**

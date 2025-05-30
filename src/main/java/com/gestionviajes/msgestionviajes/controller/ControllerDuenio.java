@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controlador REST para la gestión de dueños (Duenio).
@@ -69,8 +71,10 @@ public class ControllerDuenio {
      */
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody DuenioDto dto) {
-        boolean updated = duenioService.update(id, dto);
-        return updated ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        Optional<Duenio> updated = (duenioService.update(id, dto));
+        return updated
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     /**
@@ -82,11 +86,5 @@ public class ControllerDuenio {
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         boolean deleted = duenioService.delete(id);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/duenios/form")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("duenioDto", new DuenioDto());
-        return "duenio-form"; // Busca templates/duenio-form.html
     }
 }

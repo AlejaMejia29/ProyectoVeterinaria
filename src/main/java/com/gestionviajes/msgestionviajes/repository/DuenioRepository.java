@@ -1,6 +1,5 @@
 package com.gestionviajes.msgestionviajes.repository;
 
-import com.gestionviajes.msgestionviajes.model.Cita;
 import com.gestionviajes.msgestionviajes.model.Duenio;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -20,7 +19,7 @@ public interface DuenioRepository extends JpaRepository<Duenio, Integer> {
      * @param teléfono Número de teléfono del dueño.
      * @return Un {@link Optional} que contiene el dueño si se encuentra, o vacío si no.
      */
-    Optional<Duenio> findByCorreoOrTeléfono(String correo, String teléfono);
+    Optional<Duenio> findByCorreoOrTelefono(String correo, String teléfono);
 
     /**
      * Busca un dueño únicamente por su correo electrónico.

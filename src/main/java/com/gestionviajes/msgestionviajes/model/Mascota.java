@@ -13,7 +13,7 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "id_dueno", nullable = false)
-    private Duenio dueno;
+    private Duenio duenio;
 
     private String nombre;
     private String especie;
@@ -38,12 +38,12 @@ public class Mascota {
         this.idMascota = idMascota;
     }
 
-    public Duenio getDueno() {
-        return dueno;
+    public Duenio getDuenio() {
+        return duenio;
     }
 
     public void setDueno(Duenio dueno) {
-        this.dueno = dueno;
+        this.duenio = dueno;
     }
 
     public String getNombre() {
